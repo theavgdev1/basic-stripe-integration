@@ -11,7 +11,7 @@ $cartArray = [
             'product_data' => [
                 'name' => 'Fried Rice',
             ],
-            'unit_amount' => 9.99 * 100,  //  convert to cents
+            'unit_amount' => 9.99 * 100,    //  convert to cents
             'tax_behavior' => 'exclusive'
         ],
         'quantity' => 1,
@@ -23,7 +23,7 @@ $cartArray = [
             'product_data' => [
                 'name' => 'Fried Noodle',
             ],
-            'unit_amount' => 11.99 * 100,  //  convert to cents
+            'unit_amount' => 11.99 * 100,   //  convert to cents
             'tax_behavior' => 'exclusive'
         ],
         'quantity' => 2,
@@ -35,16 +35,13 @@ $cartArray = [
             'product_data' => [
                 'name' => 'Tip (not taxed)',
             ],
-            'unit_amount' => 5 * 100,  //  convert to cents
+            'unit_amount' => 5 * 100,       //  convert to cents
         ],
         'quantity' => 1,
     ]
 ];
 
-// echo "<pre>";
-// var_dump($_SERVER);
-// echo "</pre>";
-
+// Create Stripe checkout session
 $checkoutSession = $stripe->checkout->sessions->create([
     'line_items' => $cartArray,
     'mode' => 'payment',
@@ -52,8 +49,8 @@ $checkoutSession = $stripe->checkout->sessions->create([
     'cancel_url' => 'http://localhost/cart.php?provider_session_id={CHECKOUT_SESSION_ID}'
 ]);
 
-// provider_session_id
-$checkoutSession->id;
+// Retrieve provider_session_id. Store in database.
+//$checkoutSession->id;
 
 // Send user to Stripe
 header('Content-Type: application/json');
