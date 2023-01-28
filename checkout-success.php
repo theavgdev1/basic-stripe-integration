@@ -4,3 +4,4 @@ if(!isset($_REQUEST['provider_session_id'])) {
 }
 
 // Use provider_session_id to look up order in database, then take further action.
+echo "Order Confirmed";

@@ -4,7 +4,7 @@ require_once 'stripe-php-10.3.0/init.php';
 
 $stripe = new \Stripe\StripeClient(STRIPE_SECRET_KEY);
 
-$cartArray = [
+$lineItems = [
     [
         'price_data' => [
             'currency' => 'usd',
@@ -43,7 +43,7 @@ $cartArray = [
 
 // Create Stripe checkout session
 $checkoutSession = $stripe->checkout->sessions->create([
-    'line_items' => $cartArray,
+    'line_items' => $lineItems,
     'mode' => 'payment',
     'success_url' => 'http://localhost/checkout-success.php?provider_session_id={CHECKOUT_SESSION_ID}',
     'cancel_url' => 'http://localhost/cart.php?provider_session_id={CHECKOUT_SESSION_ID}'
